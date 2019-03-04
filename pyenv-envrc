@@ -1,0 +1,2 @@
+pyversion=3.6.8 # 只需要修改这个参数
+use python system ${pyversion}

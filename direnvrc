@@ -1,0 +1,34 @@
+use_python() {
+  if [ "system" = "$1" ]; then
+    local python_root=$(pyenv root)/versions/$2
+    load_prefix "$python_root"
+    if [[ -x "$python_root/bin/python" ]]; then
+      # layout python "$python_root/bin/python"
+      PATH_add "$python_root/bin"
+    else
+      echo "Error: $python_root/bin/python can't be executed."
+      exit
+    fi
+  elif [ "virtual" = "$1" ]; then
+    echo "println kkdkdk"
+    local pyversion=$2
+    pyenv local ${pyversion}
+  else
+    echo "wrong env."
+  fi
+}
+layout_virtualenv() {
+    local pyversion=$1
+    local pvenv=$2
+    if [ -n "$(which pyenv-virtualenv)" ]; then
+        pyenv virtualenv --force --quiet ${pyversion} ${pvenv}-${pyversion}
+    fi
+}
+layout_activate() {
+    if [ -n "$(which pyenv)" ]; then
+        local pyenvprefix=$(pyenv prefix)
+        local pyversion=$(pyenv version-name)
+        local pvenv="$1"
+        source ${pyenvprefix}/envs/${pvenv}-${pyversion}/bin/activate
+    fi
+}

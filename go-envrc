@@ -1,0 +1,4 @@
+export GOROOT=/usr/local/go/1.12
+export GOBIN=$GOROOT/bin
+export GOPATH=$GOROOT/selfcode:$PWD
+export PATH=$GOPATH:$GOBIN:$PATH
